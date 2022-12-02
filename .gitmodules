@@ -1,0 +1,7 @@
+[submodule "rust-sgx-sdk"]
+	path = rust-sgx-sdk
+	url = https://github.com/apache/incubator-teaclave-sgx-sdk
+
+[submodule "RSA-accumulator"]
+	path = scripts/simulator/RSA-accumulator
+	url = https://github.com/oleiba/RSA-accumulator
