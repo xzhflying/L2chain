@@ -1,0 +1,10 @@
+[workspace]
+
+members = [
+    "l2chain",
+    "witness_cache",
+    "core",
+    "chain",
+    "common-utils",
+    "baseline"
+]

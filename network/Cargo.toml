@@ -1,0 +1,29 @@
+[package]
+name = "network"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+libp2p = { version = "0.39", default-features = false, features = [
+    "dns-async-std",
+    "identify",
+    "kad",
+    "gossipsub",
+    "mdns",
+    "noise",
+    "ping",
+    "request-response",
+    "secp256k1",
+    "tcp-async-io",
+    "yamux",
+]}
+bs58 = "0.4"
+tokio = { version = "1.11", features = ["full", "parking_lot"] }
+futures = "0.3"
+async-trait = "0.1"
+
+l2chain-core = { package = "core", path = "../core" }

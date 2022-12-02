@@ -1,0 +1,13 @@
+[package]
+name = "simulation_enclave"
+version = "0.1.0"
+edition = "2021"
+publish = false
+build = "build.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+sgx_types = { path = "../rust-sgx-sdk/sgx_types" }
+sgx_urts = { path = "../rust-sgx-sdk/sgx_urts"  }
+

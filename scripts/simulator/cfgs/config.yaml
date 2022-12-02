@@ -1,0 +1,19 @@
+# node parameters
+Validators: 4 # 16
+DApps: 1 # 4
+DAppNodes: 4
+
+# consensus parameters
+L1_protocol: PoW
+L2_protocol: Raft
+block_interval: 10
+
+# transaction parameters
+workload: workloada
+txn_count: 256 # 65536
+L2_batch_size: 64 # 256
+block_size: 64 # 256
+
+# accumulator parameters
+state_count: 256 # 2048 # 65536
+witness_cache_count: 4

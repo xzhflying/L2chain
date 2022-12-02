@@ -1,0 +1,73 @@
+# vim: set ft=toml:
+
+# The role of the node.
+[role]
+# Possible values: client, executor, validator.
+role = "executor"
+dapp_id = 0
+dapp_total = 4
+
+# Example configure for role = clients (or executor).
+# role = "client"
+# dapp_id = 0
+# dapp_total = 4
+
+
+# Chain configure.
+[chain]
+# Consensus method. Possible values: pow, raft.
+consensus = "pow"
+# The duration to generate a new block (in the unit of second).
+block_interval = 1
+
+# Configure for miners.
+[miner]
+# Whether to compress partial tries. Default true.
+compress_trie = true
+# The following three configures control when to create a new block.
+# A block is created if:
+#   (len(txs) >= min_tx && tx_collecting_time >= max_block_interval) || len(txs) == max_txs
+
+# Max number of txs in one block. If missing, default to 512.
+max_txs = 256
+# Min number of txs in one block. It should be greater than 0.
+min_txs = 1
+# Max time span used in collecting txs in milliseconds.
+max_block_interval = 2000
+
+# Configure used in TEE. Used by storage nodes with TEE only.
+# Obtain keys from https://api.portal.trustedservices.intel.com/EPID-attestation
+[tee]
+# Subscription Key that provides access to the Intel API
+api_key = "YOUR_API_KEY"
+# Service Provider ID (SPID)
+spid = "YOUR_SPID"
+# Whether to sign linkable quote
+linkable = false
+
+# Network configure.
+[network]
+# Listen address for node
+listen = "/ip4/0.0.0.0/tcp/6000"
+
+# Listen address for HTTP server (Client only)
+http_listen = "127.0.0.1:8000"
+
+# Ed25519 key. If missing, a new key will be generated.
+# keypair = "Ed25519_KEY"
+
+# Whether to enable mDNS
+mdns = true
+
+# Known peers
+# [[network.peers]]
+# The base58 address of a peer.
+# Valide input should be in the base58 format (numbers and letters without 0 and O)
+# peer_id = "1"
+# address = "/ip4/127.0.0.1/tcp/6000"
+
+# Configure used in Proof-of-Work.
+[pow]
+# The initial difficulty used by PoW.
+# The default value is 5_000_000.
+init_diff = 5000000

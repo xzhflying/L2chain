@@ -1,0 +1,37 @@
+[package]
+name = "core"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = [
+    "std",
+    "primitive-types-rlp",
+]
+std = [
+    "anyhow/std",
+    "blake2b_simd/std",
+    "primitive-types/std",
+    "serde/std",
+    "ed25519/std",
+    "ed25519-dalek/std",
+    "hex/std",
+]
+primitive-types-rlp = [
+    "primitive-types/rlp",
+]
+
+[dependencies]
+anyhow = { version = "1.0", default-features = false }
+serde = { version = "1.0", default-features = false, features = ["derive", "alloc"] }
+derive_more = "0.99"
+primitive-types = { version = "0.11", default-features = false, features = ["serde_no_std", "byteorder"] }
+blake2b_simd = { version = "1", default-features = false }
+ed25519 = { version = "1", default-features = false, features = ["serde"] }
+ed25519-dalek = { version = "1.0", default-features = false, features = ["alloc", "rand", "u64_backend"] }
+hex = { version = "0.4", default-features = false }
+hashbrown = { version = "0.9", features = ["serde"] }
+toml = "0.5"

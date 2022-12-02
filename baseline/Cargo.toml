@@ -1,0 +1,20 @@
+[package]
+name = "baseline"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "baseline-node-simple"
+
+[dependencies]
+tokio = { version = "1", features = ["full", "parking_lot"] }
+structopt = "0.3"
+serde = { version = "1.0", features = ["derive"] }
+
+core = { path = "../core" }
+chain = { path = "../chain" }
+common-utils = { path = "../common-utils" }
+network = { path = "../network" }

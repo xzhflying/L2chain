@@ -1,0 +1,13 @@
+enclave {
+    from "sgx_tstd.edl" import *;
+    from "sgx_stdio.edl" import *;
+    from "sgx_backtrace.edl" import *;
+    from "sgx_tstdc.edl" import *;
+    trusted {
+        /* define ECALLs here. */
+
+        public sgx_status_t txn_simulation([in, size=len] const uint8_t* dumped_txns, size_t len);
+        public sgx_status_t txn_execution([in, size=len] const uint8_t* dumped_txns, size_t len);
+        public sgx_status_t splt_verification([in, size=len] const uint8_t* proof, const uint8_t* content, const uint8_t* block_hash);
+    };
+};
