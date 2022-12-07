@@ -3,6 +3,7 @@
 # Output: the partition of witness cache
 import numpy as np
 from itertools import combinations
+from math import floor
 
 def bf_search(freq, state_count, cache_count):
     freq.sort()
@@ -30,32 +31,30 @@ def opt_partition(freq, state_count, cache_count):
     partition = [[] for _ in range(cache_count)]
     table = np.array([[[np.inf for _ in range(cache_count)] for _ in range(state_count)] for _ in range(state_count)])
     
-    # inital for f(0, j, 2)
-    for j in range(1, int(state_count/2)):
-        table[0][j][2] = (j-1)*sum(freq[:j]) + (state_count - j - 1) * (sum(freq) - sum(freq[:j]))
+    for i in range(state_count):
+        for j in range(state_count-i):
+            table[i][j][0] = (state_count - i -1)*sum(freq[-(state_count - i ):])
 
-    for i in range(int(state_count/3)):
-        for j in range(i, int((state_count-i)/2)):
-            table[i][j][2] = (i-1) * sum(freq[:i]) + (j-1) * sum(freq[i:(i+j)]) + (state_count-i-j-1) * sum(freq[(i+j):])
+    for k in range(1, cache_count):
+        for i in range(state_count - 2, -1, -1):
+            for j in range(int(floor((state_count-i)/(k+1))) - 1, -1, -1):
+                # print("{},{},{}".format(i,j,k))
+                par = table[i+j+1][j][k-1] + j*sum(freq[i:(i+j+1)])
+                non_par = table[i][j+1][k]
+                table[i][j][k] = min(par, non_par)
 
-    for k in range(3, cache_count):
-        for j in range(int(state_count/k)-1, 0, -1):
-            par = table[j][j][k-1] + (j-1)*sum(freq[:j])
-            non_par = table[0][j+1][k]
-            table[0][j][k] = min(par, non_par)
-
-    # TODO: partition
+    # TODO: output partition
     
-
     return table
 
 
 if __name__ == '__main__':
-    state_count = 8
+    state_count = 16
     cache_count = 3
     freq = np.random.uniform(0, 1, state_count)
-    print(opt_partition(freq, state_count, cache_count))
+    print(opt_partition(freq, state_count, cache_count)[0])
     
     min_cost, part = bf_search(freq, state_count, cache_count)
+
     print(min_cost)
     print(part)
