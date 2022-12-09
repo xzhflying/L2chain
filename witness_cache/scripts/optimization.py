@@ -43,16 +43,30 @@ def opt_partition(freq, state_count, cache_count):
                 non_par = table[i][j+1][k]
                 table[i][j][k] = min(par, non_par)
 
-    # TODO: output partition
-    
-    return table
+    partition = output_partition(table, state_count, cache_count)
+    return partition # table
+
+
+def output_partition(table, state_count, cache_count):
+    partition = []
+    i, k = 0, cache_count - 1
+    while k != -1:
+        temp = table[i][0][k]
+        for j in range(1, state_count):
+            if table[i][j][k] != temp:
+                partition.append(i+j)
+                i += j
+                k -= 1
+                break
+    partition.pop() # The last breaking point is the end of the state list
+    return partition
 
 
 if __name__ == '__main__':
-    state_count = 16
-    cache_count = 3
+    state_count = 64
+    cache_count = 5
     freq = np.random.uniform(0, 1, state_count)
-    print(opt_partition(freq, state_count, cache_count)[0])
+    print(opt_partition(freq, state_count, cache_count))
     
     min_cost, part = bf_search(freq, state_count, cache_count)
 
